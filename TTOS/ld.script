@@ -1,0 +1,5 @@
+ENTRY(main)
+SECTIONS
+{
+  . = 0x000000;                 /* Image starts here                    */
+}
