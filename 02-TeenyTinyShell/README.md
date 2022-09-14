@@ -6,7 +6,7 @@ A shell is a program that provides a traditional text-based interface to an oper
 
 There are many shells available for Linux, arguably the most popular is 'bash' which stands for the Bourne-Again SHell.  The shell you will be developing for this lab will work similarly to 'bash' but will have fewer features.  For more information about the 'bash' shell, you can check out the Wikipedia page:  [https://en.wikipedia.org/wiki/Bash_(Unix_shell)](https://en.wikipedia.org/wiki/Bash_(Unix_shell))
 
-For this lab, you will be using the ```fork()``` system call to create child processes, then running ```exec()``` to run the commands specified by the user, finally waiting for the commands to finish executing using the wait() system call.  Before you start, it might be helpful to read the 'man' pages for these system calls.
+For this lab, you will be using the ```fork()``` system call to create child processes, then running ```exec()``` to run the commands specified by the user, finally waiting for the commands to finish executing using the ```wait()``` system call.  Before you start, it might be helpful to read the 'man' pages for these system calls.
 
 - man 2 fork
 - man 2 exec
