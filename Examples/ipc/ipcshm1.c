@@ -4,15 +4,15 @@
  *             NOTE: named shared memory segments are persistent
  */
 
-#include <sys/types.h> // needed for pid_t
-#include <sys/wait.h>  // needed for wait system call
 #include <fcntl.h>     // needed for parameter values for shm_open
-#include <unistd.h>    // needed for fork, getpid, getppid, kill system calls
-#include <stdlib.h>    // needed for exit
 #include <signal.h>    // needed for signal system call
 #include <stdio.h>     // needed for printf, perror
-#include <sys/mman.h>  // needed for mmap, munmap, shm system calls
+#include <stdlib.h>    // needed for exit
 #include <string.h>    // needed for strcpy
+#include <sys/mman.h>  // needed for mmap, munmap, shm system calls
+#include <sys/types.h> // needed for pid_t
+#include <sys/wait.h>  // needed for wait system call
+#include <unistd.h>    // needed for fork, getpid, getppid, kill system calls
 
 #define MAPPED_SIZE 128
 
@@ -20,7 +20,8 @@ int main()
 {
     // Create and open a shared memory segment
     int shmfd = shm_open("/CS3841MEMORY", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-    if(shmfd == -1) {
+    if (shmfd == -1)
+    {
         printf("COULD NOT OPEN SHARED MEMORY SEGMENT\n");
         exit(EXIT_FAILURE);
     }
@@ -30,20 +31,21 @@ int main()
 
     // Map the segment into the processes address space
     //    NOTE: protection is set to allow reading and writing with a shared mapping
-    void* mapped_space = mmap(NULL, MAPPED_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shmfd, 0);
-    if(mapped_space == MAP_FAILED) {
+    void *mapped_space = mmap(NULL, MAPPED_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shmfd, 0);
+    if (mapped_space == MAP_FAILED)
+    {
         printf("COULD NOT MMAP\n");
         exit(EXIT_FAILURE);
     }
 
-    pid_t pid = fork();  // fork into 2 processes
+    pid_t pid = fork(); // fork into 2 processes
 
-    if(pid < 0) // error
+    if (pid < 0) // error
     {
         perror("fork");
         exit(EXIT_FAILURE);
     }
-    else if(pid == 0) // child
+    else if (pid == 0) // child
     {
         // Child writes to shared memory segment
         strcpy(mapped_space, "HELLO");
@@ -62,7 +64,7 @@ int main()
         wait(0);
 
         // Parent reads from shared memory segment
-        printf("Parent reads %s from shared mapped segment\n", (char*)mapped_space);
+        printf("Parent reads %s from shared mapped segment\n", (char *)mapped_space);
 
         // Unmap the shared memory
         munmap(mapped_space, MAPPED_SIZE);

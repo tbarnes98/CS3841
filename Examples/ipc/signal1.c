@@ -3,10 +3,10 @@
  *            for the interrupt (CTRL+C) signal
  */
 
-#include <sys/types.h> // needed for pid_t
-#include <unistd.h>    // needed for getpid, sleep system calls
 #include <signal.h>    // needed for signal system call
 #include <stdio.h>     // needed for printf
+#include <sys/types.h> // needed for pid_t
+#include <unistd.h>    // needed for getpid, sleep system calls
 
 // Signal handler
 //    Prints the PID of the process and the received signal
@@ -22,7 +22,8 @@ int main()
     signal(SIGINT, signal_handler);
 
     // Loop forever and sleep
-    while(1) {
+    while (1)
+    {
         printf("sleeping...\n");
         sleep(1);
     }

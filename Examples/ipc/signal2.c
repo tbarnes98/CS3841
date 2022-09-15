@@ -5,10 +5,10 @@
  *             fault and essentially loops forever
  */
 
-#include <sys/types.h> // needed for pid_t
-#include <unistd.h>    // needed for getpid, sleep system calls
 #include <signal.h>    // needed for signal system call
 #include <stdio.h>     // needed for printf
+#include <sys/types.h> // needed for pid_t
+#include <unistd.h>    // needed for getpid, sleep system calls
 
 // Signal handler
 //    Prints the PID of the process and the received signal
@@ -24,6 +24,6 @@ int main()
     signal(SIGSEGV, signal_handler);
 
     // Cause a segmentation fault
-    int* i = NULL;
+    int *i = NULL;
     return *i + 10;
 }

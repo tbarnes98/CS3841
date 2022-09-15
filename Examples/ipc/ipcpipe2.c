@@ -3,22 +3,24 @@
  *              two pipes to send data in two directions
  */
 
+#include <stdio.h>     // needed for printf, perror
+#include <stdlib.h>    // needed for exit
 #include <sys/types.h> // needed for pid_t
 #include <sys/wait.h>  // needed for wait system call
 #include <unistd.h>    // needed for fork, read, write, close system calls
-#include <stdlib.h>    // needed for exit
-#include <stdio.h>     // needed for printf, perror
 
 int main()
 {
     /* Create pipes */
     int pipe_to_child[2];
-    if (pipe(pipe_to_child) == -1) {
+    if (pipe(pipe_to_child) == -1)
+    {
         printf("PIPE FAILURE\n");
         exit(EXIT_FAILURE);
     }
     int pipe_from_child[2];
-    if (pipe(pipe_from_child) == -1) {
+    if (pipe(pipe_from_child) == -1)
+    {
         printf("PIPE FAILURE\n");
         exit(EXIT_FAILURE);
     }

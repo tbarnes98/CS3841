@@ -43,7 +43,7 @@ int main()
         wait(0);
 
         /* Read data */
-        char data[32];
+        char data[32] = {0};
         read(myfile, data, sizeof(data));
         printf("Parent received %s from child\n", data);
 

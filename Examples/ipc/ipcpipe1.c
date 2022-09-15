@@ -3,17 +3,18 @@
  *              a child process to a parent process
  */
 
+#include <stdio.h>     // needed for printf, perror
+#include <stdlib.h>    // needed for exit
 #include <sys/types.h> // needed for pid_t
 #include <sys/wait.h>  // needed for wait system call
 #include <unistd.h>    // needed for fork, read, write, close system calls
-#include <stdlib.h>    // needed for exit
-#include <stdio.h>     // needed for printf, perror
 
 int main()
 {
     /* Create a pipe */
     int pipefd[2];
-    if (pipe(pipefd) == -1) {
+    if (pipe(pipefd) == -1)
+    {
         perror("pipe");
         exit(EXIT_FAILURE);
     }
@@ -46,7 +47,7 @@ int main()
         close(pipefd[0]);
 
         /* Write to child */
-        write(pipefd[1], "HELLO", 5);
+        write(pipefd[1], "HELLO WORLD!", 12);
 
         /* Close pipe */
         close(pipefd[1]);
