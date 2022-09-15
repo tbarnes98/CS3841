@@ -27,30 +27,6 @@ A + B = [c<sub>ij</sub>], where c<sub>ij</sub> = a<sub>ij</sub> + b<sub>ij</sub>
 
 The definition of matrix addition indicates a cell by cell addition.  For each cell in A, the value is added to the value in the corresponding cell of B.  To add A and B they must be the same dimensions.
 
-For example:
-
-$$
-A = \begin{bmatrix}
-1 & 10 & 0 \\
-3 & -2 & 6
-\end{bmatrix}
-B = \begin{bmatrix}
-1 & 4 & 0\\
-1 & 2 & 3
-\end{bmatrix}
-$$
-$$
-A + B = \begin{bmatrix}
-1 + 1 & 10 + 4 & 0 + 0 \\
-3 + 1 & -2 + 2 & 6 + 3
-\end{bmatrix}
-=
-\begin{bmatrix}
-2 & 14 & 0 \\
-4 & 0 & 9
-\end{bmatrix}
-$$
-
 Matrix addition is commutative.  So, A + B does is always equal B + A.
 
 Your task is to create two programs that will perform matrix addition for two matrices given to you as two files and print the result.  Each program must also record the amount of time it took to perform the matrix addition. 
