@@ -1,7 +1,8 @@
-#include <stdio.h>
 #include "stackm.h"
+#include <stdio.h>
 
-int main() {
+int main()
+{
     stackm mystack;
     smInit(&mystack);
 
@@ -27,6 +28,7 @@ int main() {
 
     smPush(&mystack, 10);
     smPush(&mystack, 11);
+    smRotate(&mystack, 3);
     smPrint(&mystack);
     smRotate(&mystack, 5);
     smPrint(&mystack);
