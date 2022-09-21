@@ -1,10 +1,8 @@
 ## Introduction
 
-The purpose of this lab is to design, code, and test programs to add two matrices together using both a single process and multiprocess program.  It is intended to familiarize yourself with the system calls needed to create processes and share memory on Linux.
+The purpose of this lab is to design, code, and test programs to add two matrices together using both a multi-threaded program.  It is intended to familiarize yourself with the system calls needed to create threads on linux.
 
-The first program will perform matrix addition with a single process storing the result in a matrix allocated on the heap (via malloc).  In the second program, child processes will be created with ```fork()``` to perform the addition for each row in the matrix storing their result in a matrix created in shared memory.
-
-The matrices will be read from a file.  The format for the file is given later.
+The matrices will be read from a file. The format for the file is given later.
 
 ## References
 
@@ -215,46 +213,18 @@ There are [several matrix files](matrices.zip) located provided along with this 
 
 ## Deliverables
 
-You will need to include all your source files, test case matrix files, and any other resources you used to complete lab.  Please don't just google search for a solution, but if you do use Google for any help, include a description and URL of what you used to help you.
+You will need to include all your source files and any other resources you used to complete lab. 
 
-A makefile is useful, but optional for this assignment.  If you created a makefile, include it in your submission.
+A makefile is useful, but optional for this assignment.  If you created a makefile, include it in your submission. 
 
 All files should be well documented with function comment blocks and inline comments that explain complicated code routines.  While no explicit style guidelines are set for programming in this course, code should be documented and readable.  Include your name, section, and lab name in a comment block at the top of each file.
 
-NOTE: do ***NOT*** submit any IDE configuration files (.idea, project files, etc.).  Only submit your source files and report.
-
-Prepare a lab report and submit it along with your source code.  The report should include the following:
-
-- Your name, section, date, and lab title 
-- Introduction – a description of the lab in your own words 
-- Design – a description of your design decisions in creating your solution 
-- Resources – a description of any external resources you used to complete the lab 
-- Build – instructions on how to build and run your programs.  Include the exact commands that are necessary 
-- Analysis – Your two programs (single process and multiprocess) need to print out the time to perform the matrix addition.  Use this information to evaluate the usefulness of multiprocess programming.  Is there an advantage to using multiprocessing for matrix addition?  Be thorough.  
-   <br/>In addition, answer the following in your analysis 
-  - How does the runtime of the single process compare to the multiple process version?  Faster? Slower?  Why do you think this is the case?  Think in terms of operating system overhead. 
-  - How could identifying patterns in the source matrices be used to speed up the computation? 
-  - How does shared memory affect the overall heap needed by the process?  If you run your program using valgrind, it will print out a summary of the total heap used.  What conclusions can you draw from this? 
-- Conclusion 
-  - Summary of what you learned in the lab 
-  - What specifically was challenging about this lab? 
-  - What did you like about it? 
-  - What could we do to improve it for others?
+NOTE: do ***NOT*** submit any IDE configuration files (.idea, project files, etc.).  Only submit your source files.
 
 NOTE: You should ensure that this program compiles without warning (-Wall and -Wextra) prior to submitting.
 
 Prepare a zip file with all submitted files and upload the file to Canvas per your instructor's instructions.
 
-## Grading Criteria
+## Grading Criteria (100 Points)
 
-- (35 Points) Report
-  - (5 Points) Report Introduction - Thorough description of the lab in your own words.
-  - (5 Points) Design and Testing Methodology - Detailed description of design and method for testing your implementation.
-  - (20 Points) Analysis - Answers to the analysis questions
-  - (5 Points) Conclusion - Thorough conclusion with description of what you learned, what you liked, and suggestions for lab improvements.
-- (5 Points) Documented Resources - Description of external resources used to complete the lab
-- (5 Points) Correct Submission - Followed submission instructions (e.g. IDE project files are not submitted)
-- (5 Points) Build - Code compiles without warnings or errors
-- (10 Points) Test Cases - Thoroughness of submitted test cases
-- (35 Points) Instructor Tests - Implementation passes all instructor test cases
-- (5 Points) Memory Management - Program execution is free from memory leaks. All shared memory segments are cleaned up.
+Demonstrate that your lab is working by compiling it, running it, and running any test code in person during lab hours.

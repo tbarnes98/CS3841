@@ -3,12 +3,12 @@
  *               to send a signal from one process to another
  */
 
+#include <signal.h>    // needed for signal system call
+#include <stdio.h>     // needed for printf, perror
+#include <stdlib.h>    // needed for exit
 #include <sys/types.h> // needed for pid_t
 #include <sys/wait.h>  // needed for wait system call
 #include <unistd.h>    // needed for fork, getpid, getppid, kill system calls
-#include <stdlib.h>    // needed for exit
-#include <signal.h>    // needed for signal system call
-#include <stdio.h>     // needed for printf, perror
 
 void signal_handler(int sig)
 {
@@ -23,12 +23,12 @@ int main()
 
     pid_t pid = fork(); // fork into 2 processes
 
-    if(pid < 0) // error
+    if (pid < 0) // error
     {
         perror("fork");
         exit(EXIT_FAILURE);
     }
-    else if(pid == 0) // child
+    else if (pid == 0) // child
     {
         // Send a signal to the parent by its PID
         pid_t parent_pid = getppid();

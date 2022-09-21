@@ -77,7 +77,7 @@ int main(void)
 }
 ```
 
-You should have already picked an editor or IDE to use.  Compiling at the command line is sometimes easier than using an IDE as IDEs sometimes hide error messages.  Edit, compile, and run your program entirely from the Linux VM.  Using Windows to edit the file and then transferring to Linux can cause formatting problems with the code and might introduce unexpected errors.
+You should have already picked an editor or IDE to use.  Compiling at the command line is sometimes easier than using an IDE as IDEs sometimes hide error messages.
 
 You can invoke the compiler at the command line directly:
 
@@ -204,50 +204,18 @@ Another, highly recommended, tool for you to use is valgrind.  Valgrind will mon
 
 ## Deliverables
 
-You should have at least three source files in your project:
+You will need to include all your source files and any other resources you used to complete lab. 
 
-1. smTester.c – The test driver for your stack machine and should contain the 'main' function.  Make sure your implemented test driver tests more than just the sample
-2. stackm.c – the implementation file for your stack machine operations
-3. stackm.h – the header file that defines the stack machine operations
+A makefile is useful, but optional for this assignment.  If you created a makefile, include it in your submission. 
 
-A makefile is useful, but optional for this assignment.  If you created a makefile, include it in your submission.
+All files should be well documented with function comment blocks and inline comments that explain complicated code routines.  While no explicit style guidelines are set for programming in this course, code should be documented and readable.  Include your name, section, and lab name in a comment block at the top of each file.
 
-All files should be well documented with function comment blocks and inline comments that explain complicated code routines.  While no explicit style guidelines are set for programming in this course, code should be documented and readable.  Include your name, section, and lab name in a comment block at the top of each file, including the given header file.
-
-NOTE: do ***NOT*** submit any IDE configuration files (.idea, project files, etc.).  Only submit your source files and report.
-
-Prepare a lab report and submit it along with your source code.  The report should include the following:
-
-- Your name, date, and lab title 
-- Introduction – a description of the lab in your own words
-- Design and Testing Methodology – a description of your design decisions and the process you took to create your test driver
-- Resources – a description of any external resources you used to complete the lab
-- Build – instructions on how to build and run your program.  Include the exact commands that are necessary 
-- Analysis – Discuss the key concepts from the lab and answers to the following questions 
-  - All the stack machine functions need a "reference" to the stack structure, and according to this design, that stack reference is passed as a pointer. Why is this necessary? Do all the stack functions need this to be passed as a pointer? Any exceptions? Be specific in your answer. 
-  - Unlike a Java or C++ implementation, this implementation cannot "hide" any of the internal structure of the stack. That is, users of the stack could mess up the next pointers if they are careless. Can you think of any way we could hide the structure of the stack to lessen the chances a user will mess up the stack? Describe in brief detail. 
-  - What if all smClear() did was assign NULL to top in the stack structure and nothing else. Would the program crash? Would there be any side effects? Try it and report results. 
-  - Give an example of why it might be helpful to provide an iterator or random access to elements stored in the stack (rather than always accessing the top) and outline how you could implement such a feature. 
-- Conclusion 
-  - Summary of what you learned in the lab 
-  - What specifically was challenging about this lab? 
-  - What did you like about it? 
-  - What could we do to improve it for others?
+NOTE: do ***NOT*** submit any IDE configuration files (.idea, project files, etc.).  Only submit your source files.
 
 NOTE: You should ensure that this program compiles without warning (-Wall and -Wextra) prior to submitting.
 
-Create a zip file containing your source files and your report and submit the zip file per your instructor's instructions.
+Prepare a zip file with all submitted files and upload the file to Canvas per your instructor's instructions.
 
 ## Grading Criteria (100 Points)
 
-- (35 Points) Report
-  - (5 Points) Report Introduction - Thorough description of the lab in your own words. 
-  - (5 Points) Design and Testing Methodology - Detailed description of design and method for testing your implementation. 
-  - (20 Points) Analysis - Answers to the analysis questions
-  - (5 Points) Conclusion - Thorough conclusion with description of what you learned, what you liked, and suggestions for lab improvements.
-- (5 Points) Documented Resources - Description of external resources used to complete the lab
-- (5 Points) Correct Submission - Followed submission instructions (e.g. IDE project files are not submitted)
-- (5 Points) Build - Code compiles without warnings or errors
-- (10 Points) Test Cases - Thoroughness of submitted test driver 
-- (35 Points) Instructor Tests - Implementation passes all instructor test cases 
-- (5 Points) Memory Management - Program execution is free from memory leaks
+Demonstrate that your lab is working by compiling it, running it, and running any test code in person during lab hours.

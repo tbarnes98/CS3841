@@ -154,50 +154,18 @@ Make sure your shell supports all the features listed in the "Development Requir
 
 ## Deliverables
 
-You will need to include all your source files and any other resources you used to complete lab.  Please don't just google search for a solution, but if you do use Google for any help, include a description and URL of what you used to help you. 
+You will need to include all your source files and any other resources you used to complete lab. 
 
 A makefile is useful, but optional for this assignment.  If you created a makefile, include it in your submission. 
 
 All files should be well documented with function comment blocks and inline comments that explain complicated code routines.  While no explicit style guidelines are set for programming in this course, code should be documented and readable.  Include your name, section, and lab name in a comment block at the top of each file.
 
-NOTE: do ***NOT*** submit any IDE configuration files (.idea, project files, etc.).  Only submit your source files and report.
-
-Prepare a lab report and submit it along with your source code.  The report should include the following:
-
-- Your name, section, date, and lab title 
-- Introduction – a description the lab in your own words 
-- Design – a description of your design decisions in creating your solution
-- Resources – a description of any external resources you used to complete the lab 
-- Build – instructions on how to build and run your program.  Include the exact commands that are necessary
-- Analysis – Discuss the key concepts from the lab and answers to the following questions
-  - Commands in TTSH are executed by a call to ```fork()``` followed by a call to ```exec()```.  What would bee the behavior of teeny tiny shell if the calls were reversed?
-  - There are many 'flavors' of ```exec()```.  For this lab you used ```execvp```, research the other 'flavors' of ```exec()```.  What is each used for?  Be sure to site your sources:
-    - execl
-    - execlp
-    - execle
-    - execv
-    - execvp
-    - execvpe
-  - For this lab you used the ```fork()``` system call to create a child process to execute the command.  There is another version of fork called ```vfork()```.  Research this system call and describe how it works.  Be sure to site your sources.  When would you choose to use ```vfork()``` instead of ```fork()```.
-- Conclusion 
-  - Summary of what you learned in the lab 
-  - What specifically was challenging about this lab? 
-  - What did you like about it? 
-  - What could we do to improve it for others?
+NOTE: do ***NOT*** submit any IDE configuration files (.idea, project files, etc.).  Only submit your source files.
 
 NOTE: You should ensure that this program compiles without warning (-Wall and -Wextra) prior to submitting.
 
 Prepare a zip file with all submitted files and upload the file to Canvas per your instructor's instructions.
 
-## Grading Criteria
+## Grading Criteria (100 Points)
 
-- (35 Points) Report
-  - (5 Points) Report Introduction - Thorough description of the lab in your own words.
-  - (5 Points) Design and Testing Methodology - Detailed description of design and method for testing your implementation.
-  - (20 Points) Analysis - Answers to the analysis questions
-  - (5 Points) Conclusion - Thorough conclusion with description of what you learned, what you liked, and suggestions for lab improvements.
-- (5 Points) Documented Resources - Description of external resources used to complete the lab
-- (5 Points) Correct Submission - Followed submission instructions (e.g. IDE project files are not submitted)
-- (5 Points) Build - Code compiles without warnings or errors
-- (45 Points) Instructor Tests - Implementation passes all instructor test cases
-- (5 Points) Memory Management - Program execution is free from memory leaks
+Demonstrate that your lab is working by compiling it, running it, and running any test code in person during lab hours.
