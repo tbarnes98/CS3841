@@ -133,6 +133,28 @@ int main(int argc, char* argv[])
 
 For this assignment, you'll just need to do the index calculation for the correct index based on the value's row and column.  From there the calculation is just based on the matrix addition formula.
 
+### Timing Operations
+The below function will get the current time in nanoseconds.
+
+You should call this function beforee running your addition and then again after. By subtracting the results you should print the total time taken to complete the addition operation.
+
+```c
+#define NS_PER_SEC 1000000000
+
+static inline uint64_t gettime_ns()
+{
+    struct timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    return ts.tv_sec * NS_PER_SEC + ts.tv_nsec;
+}
+```
+
+To pring your results you could run:
+
+```c
+printf("Addition took %" PRIu64 " nanoseconds\n", end - start);
+```
+
 ### Print the Result
 
 It's probably easiest to store the matrix for the addition result in its own malloc'ed space.  Once you have the result, you'll need to perform the index math to print out the matrix elements to the screen.  For our example, that would be:
