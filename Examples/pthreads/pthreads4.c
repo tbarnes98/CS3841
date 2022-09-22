@@ -14,8 +14,10 @@
 //   Returns 1 if prime, 0 if not prime
 int is_prime(int v)
 {
-    for(int i = 2; i < v; i++) {
-        if(v % i == 0) {
+    for (int i = 2; i < v; i++)
+    {
+        if (v % i == 0)
+        {
             return 0;
         }
     }
@@ -27,13 +29,16 @@ int is_prime(int v)
 //    Modifies the input parameter by dereferencing the pointer
 //
 // NOTE: that parameters and return value are pointers
-void* thread_routine(void* args)
+void *thread_routine(void *args)
 {
-    int* val = (int*)args;
-    if(is_prime(*val)) {
+    int *val = (int *)args;
+    if (is_prime(*val))
+    {
         printf("THREAD %lu FOUND that %d is prime\n", pthread_self(), *val);
         *val = 1;
-    } else {
+    }
+    else
+    {
         printf("THREAD %lu FOUND that %d is not prime\n", pthread_self(), *val);
         *val = 0;
     }
@@ -51,11 +56,13 @@ int main()
     // Create 2 threads
     pthread_t thr1;
     pthread_t thr2;
-    if(pthread_create(&thr1, NULL, thread_routine, (void*)&val1) == -1) {
+    if (pthread_create(&thr1, NULL, thread_routine, (void *)&val1) == -1)
+    {
         printf("COULD NOT CREATE A THREAD\n");
         exit(EXIT_FAILURE);
     }
-    if(pthread_create(&thr2, NULL, thread_routine, (void*)&val2) == -1) {
+    if (pthread_create(&thr2, NULL, thread_routine, (void *)&val2) == -1)
+    {
         printf("COULD NOT CREATE A THREAD\n");
         exit(EXIT_FAILURE);
     }

@@ -15,9 +15,10 @@ int global_value = 10;
 //   global data is shared between threads
 //
 // NOTE: that parameters and return value are pointers
-void* thread_routine()
+void *thread_routine()
 {
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         printf("THREAD READS GLOBAL VALUE: %d\n", global_value);
         global_value++;
         sleep(1);
@@ -29,13 +30,15 @@ int main()
 {
     // Create a thread
     pthread_t thr_id;
-    if(pthread_create(&thr_id, NULL, thread_routine, NULL) == -1) {
+    if (pthread_create(&thr_id, NULL, thread_routine, NULL) == -1)
+    {
         printf("COULD NOT CREATE A THREAD\n");
         exit(EXIT_FAILURE);
     }
 
     // Write to global data
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         printf("PARENT READS GLOBAL: %d\n", global_value);
         sleep(1);
     }
