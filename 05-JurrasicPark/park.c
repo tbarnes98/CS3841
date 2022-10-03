@@ -1,4 +1,4 @@
-// os45park.c - Jurassic Park	10/24/2013
+// os45park.c - Jurassic Park   10/24/2013
 // ***********************************************************************
 // **   DISCLAMER ** DISCLAMER ** DISCLAMER ** DISCLAMER ** DISCLAMER   **
 // **                                                                   **
@@ -17,11 +17,13 @@
 // ***********************************************************************
 #include <assert.h>
 #include <ctype.h>
+#include <fcntl.h>
 #include <pthread.h>
 #include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
@@ -147,7 +149,7 @@ void *jurassicTask(void *args)
                     // seat open
                     sprintf(buf, "WAIT(seatFilled[%d])", c[i]);
                     ParkDebug(buf);
-                    pthread_mutex_unlock(&seatFilled[c[i]]);
+                    pthread_mutex_lock(&seatFilled[c[i]]);
                     // passenger in seat
                     myPark.cars[c[i]].passengers++;
                 }
@@ -189,8 +191,8 @@ void *jurassicTask(void *args)
 //***********************************************************************
 // Move car in Jurassic Park (if possible)
 //
-//	return -1 if location occupied
-//			  0 if move ok
+//  return -1 if location occupied
+//            0 if move ok
 //         1 if no move
 //
 int makeMove(int car)
@@ -239,7 +241,7 @@ int makeMove(int car)
     case 33: {
         // if there is someone in car and noone is in line, proceed
         // if ((myPark.cars[car].passengers == NUM_SEATS) ||
-        //	 ((myPark.numInCarLine == 0) && myPark.cars[car].passengers))
+        //   ((myPark.numInCarLine == 0) && myPark.cars[car].passengers))
         // if car is full, proceed into park
         if (myPark.cars[car].passengers == NUM_SEATS)
         {
@@ -282,7 +284,6 @@ void *jurassicDisplayTask(void *args)
     while (!begin)
     {
     }
-    printf("Starting jurassicDisplayTask\n");
 
     // display park every second
     do
@@ -301,6 +302,7 @@ void *jurassicDisplayTask(void *args)
 
     } while (myPark.numExitedPark < NUM_VISITORS);
     // park done
+    pthread_mutex_unlock(&moveCars);
     printf("\nThank you for visiting Jurassic Park!!");
     return NULL;
 } // end
@@ -308,30 +310,30 @@ void *jurassicDisplayTask(void *args)
 // Draw Jurassic Park
 //          1         2         3         4         5         6         7
 // 01234567890123456789012345678901234567890123456789012345678901234567890
-//                _______________________________________________________	0
-//   Entrance    /            ++++++++++++++++++++++++++++++++++++++++++|	1
-//              -             +o0o-o1o-o2o-o3o-o4o-o5o-o6o             +|	2
-//          ## -             /+   /                       \            +|	3
-//            /             o +  o     ************        o           +|	4
-//   |********         ##>>33 + 23     *Cntrl Room*        7           +|	5
-//   |*Ticket*              o +  o     * A=# D1=# *        o           +|	6
-//   |*Booth *             32 +  |     * B=# D2=# *       / \          +|	7
-//   |* T=#  * ##           o +  o     * C=# D3=# *      o   o8o-o9o   +|	8
-//   |* P=## *             31 + 22     * D=# D4=# *    24           \  +|	9
-//   |* S=#  *              o +  o     ************    o             o +|	10
-//   |********         ##<<30 +   \                   /             10 +|	11
-//   |                      o +    o21-o20-o27-o26-o25               o +|	12
-//   |                       \+       /   \                          | +|	13
-//   |                        +o29-o28     o                         o +|	14
-//   |                        +++++++++++ 19                        11 +|	15
-//   |                                  +  o                         o +|	16
-//   |              ##     ##           +   \                       /  +|	17
-//   |        ******\ /****\ /********  +    o  O\                 o   +|	18
-//   |        *         *            *  +   18    \/|||\___       12   +|	19
-//    \       *  Gifts  *   Museum   *  +    o     x   x           o   +|	20
-//     -      *    #    *     ##     *  +     \                   /    +|	21
-//   ## -     *         *            *  +      o17-o16-o15-o14-o13     +|	22
-//       \    ************************  ++++++++++++++++++++++++++++++++|	23
+//                _______________________________________________________   0
+//   Entrance    /            ++++++++++++++++++++++++++++++++++++++++++|   1
+//              -             +o0o-o1o-o2o-o3o-o4o-o5o-o6o             +|   2
+//          ## -             /+   /                       \            +|   3
+//            /             o +  o     ************        o           +|   4
+//   |********         ##>>33 + 23     *Cntrl Room*        7           +|   5
+//   |*Ticket*              o +  o     * A=# D1=# *        o           +|   6
+//   |*Booth *             32 +  |     * B=# D2=# *       / \          +|   7
+//   |* T=#  * ##           o +  o     * C=# D3=# *      o   o8o-o9o   +|   8
+//   |* P=## *             31 + 22     * D=# D4=# *    24           \  +|   9
+//   |* S=#  *              o +  o     ************    o             o +|   10
+//   |********         ##<<30 +   \                   /             10 +|   11
+//   |                      o +    o21-o20-o27-o26-o25               o +|   12
+//   |                       \+       /   \                          | +|   13
+//   |                        +o29-o28     o                         o +|   14
+//   |                        +++++++++++ 19                        11 +|   15
+//   |                                  +  o                         o +|   16
+//   |              ##     ##           +   \                       /  +|   17
+//   |        ******\ /****\ /********  +    o  O\                 o   +|   18
+//   |        *         *            *  +   18    \/|||\___       12   +|   19
+//    \       *  Gifts  *   Museum   *  +    o     x   x           o   +|   20
+//     -      *    #    *     ##     *  +     \                   /    +|   21
+//   ## -     *         *            *  +      o17-o16-o15-o14-o13     +|   22
+//       \    ************************  ++++++++++++++++++++++++++++++++|   23
 //
 char *myTime(char *svtime)
 {

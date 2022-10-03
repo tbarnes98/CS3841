@@ -5,7 +5,7 @@
 #define NUM_DRIVERS 4
 
 #define NUM_SEATS 3
-#define NUM_VISITORS (NUM_SEATS * 15)
+#define NUM_VISITORS (NUM_SEATS * 20)
 
 #define MAX_IN_PARK 20
 #define MAX_TICKETS (NUM_CARS * NUM_SEATS)
@@ -15,7 +15,7 @@
 
 #define ParkDebug(s) printf("\n%s: %s", "Debug", s);
 
-int begin;
+volatile int begin;
 
 typedef struct car
 {
