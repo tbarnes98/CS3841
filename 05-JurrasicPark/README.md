@@ -177,11 +177,11 @@ pthread_mutex_lock(&rideOver[myID]); /*if car full, wait until ride over*/
 
 In summary:
 
-![sum](/assets/sum.png)
+![sum](./assets/sum.png)
 
 Park variables correspond to the park display as follows:
 
-![park](/assets/parkvars.png)
+![park](./assets/parkvars.png)
 
 
 # Suggested Steps to Implementing the Jurassic Park Project
