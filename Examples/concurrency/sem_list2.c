@@ -1,7 +1,7 @@
-s /*
-   * sem_list2.c - Uses a semaphore as a way to control access
-   *               to a critical section for a singly linked list
-   */
+/*
+ * sem_list2.c - Uses a semaphore as a way to control access
+ *               to a critical section for a singly linked list
+ */
 
 #include <pthread.h>
 #include <semaphore.h>
@@ -10,7 +10,7 @@ s /*
 #include <sys/types.h>
 #include <unistd.h>
 
-    typedef struct node
+typedef struct node
 {
     int val;
     struct node *next;

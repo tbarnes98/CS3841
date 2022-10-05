@@ -7,11 +7,13 @@
  *                Consusmers wait for at least one filled spot before reading
  */
 
+#include <fcntl.h>
 #include <pthread.h>
 #include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -60,8 +62,8 @@ unsigned char buffer_remove(circular_buffer *b)
 }
 
 // Semaphores for controlling access
-sem_t fullCount;
-sem_t emptyCount;
+sem_t *fullCount;
+sem_t *emptyCount;
 
 // Start flag
 volatile int start = 0;
@@ -76,7 +78,7 @@ void *producer()
     for (int i = 0; i < ELEMENTS; i++)
     {
         // Wait for a free spot in the buffer
-        sem_wait(&emptyCount);
+        sem_wait(emptyCount);
 
         // Add an element to the buffer
         unsigned char value = (i % 100) + 1; // Make sure the value isn't zero
@@ -84,7 +86,7 @@ void *producer()
         printf("Producer added: %d\n", value);
 
         // Signal the consumer that there something to consume
-        sem_post(&fullCount);
+        sem_post(fullCount);
     }
 
     return NULL;
@@ -100,13 +102,13 @@ void *consumer()
     for (int i = 0; i < ELEMENTS; i++)
     {
         // Wait for element to consume
-        sem_wait(&fullCount);
+        sem_wait(fullCount);
 
         // Remove an element from the buffer
         printf("Consumer removed: %d\n", buffer_remove(&buffer));
 
         // Signal the producer that there is a free spot
-        sem_post(&emptyCount);
+        sem_post(emptyCount);
     }
 
     return NULL;
@@ -115,8 +117,10 @@ void *consumer()
 // Main process
 int main()
 {
-    sem_init(&fullCount, 0, 0);
-    sem_init(&emptyCount, 0, BUFFER_SIZE);
+    // sem_init(&fullCount, 0, 0);
+    fullCount = sem_open("sem1", O_CREAT, 0777, 0);
+    // sem_init(&emptyCount, 0, BUFFER_SIZE);
+    emptyCount = sem_open("sem2", O_CREAT, 0777, BUFFER_SIZE);
     buffer_init(&buffer);
 
     pthread_t prod;
@@ -137,8 +141,10 @@ int main()
     pthread_join(prod, NULL);
     pthread_join(cons, NULL);
 
-    sem_destroy(&fullCount);
-    sem_destroy(&emptyCount);
+    sem_unlink("sem1");
+    // sem_destroy(&fullCount);
+    sem_unlink("sem2");
+    // sem_destroy(&emptyCount);
 
     return EXIT_SUCCESS;
 }

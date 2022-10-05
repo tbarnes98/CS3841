@@ -1,8 +1,8 @@
-s /*
-   * race.c - Shows the race condition that can happen
-   *          then threads try to modify multiple global
-   *          values at the same time
-   */
+/*
+ * race.c - Shows the race condition that can happen
+ *          then threads try to modify multiple global
+ *          values at the same time
+ */
 
 #include <pthread.h>
 #include <stdio.h>
@@ -10,8 +10,8 @@ s /*
 #include <sys/types.h>
 #include <unistd.h>
 
-    // start flag
-    volatile int start = 0;
+// start flag
+volatile int start = 0;
 
 // shared global
 static int counter1 = 0;
