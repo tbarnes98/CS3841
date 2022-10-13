@@ -1,1 +1,0 @@
-pandoc --webtex --ascii -f markdown -t html5 -o .\%1.html .\%1.md

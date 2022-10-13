@@ -99,6 +99,32 @@ pthread_mutex_lock(&parkMutex);
 myPark.numOutsidePark++;
 pthread_mutex_unlock(&parkMutex);
 ```
+or
+```c
+/*Visitor Task Example*/
+sem_t mySemaphore;
+
+//...
+
+// pass semaphore to car (1 at a time)
+pthread_mutex_lock(&mailboxMutex); // wait for mailbox
+sem_wait(&needPassenger); // wait for passenger request
+gMailbox = mySemaphore; // put semaphore in mailbox
+sem_post(vmailboxReady); // raise the mailbox flag
+sem_wait(&mailAcquired); // wait for delivery
+pthread_mutex_unlock(&mailboxMutex); // release mailbox
+
+/*Car Task Example*/
+sem_t passengerSems[3];
+
+//...
+
+// get passenger semaphore
+sem_post(needPassenger);
+sem_wait(mailboxReady); // wait for mail
+passengerSems[i] = gMailbox; // get mail
+sem_post(mailAcquired); // put flag down
+```
 
 # Interfacing with "jurassicTask"
 
