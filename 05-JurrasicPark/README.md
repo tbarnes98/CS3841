@@ -109,13 +109,13 @@ sem_t mySemaphore;
 // pass semaphore to car (1 at a time)
 pthread_mutex_lock(&mailboxMutex); // wait for mailbox
 sem_wait(&needPassenger); // wait for passenger request
-gMailbox = mySemaphore; // put semaphore in mailbox
+gMailbox = &mySemaphore; // put semaphore in mailbox
 sem_post(&mailboxReady); // raise the mailbox flag
 sem_wait(&mailAcquired); // wait for delivery
 pthread_mutex_unlock(&mailboxMutex); // release mailbox
 
 /*Car Task Example*/
-sem_t passengerSems[3];
+sem_t* passengerSems[3];
 
 //...
 
