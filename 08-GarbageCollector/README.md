@@ -25,6 +25,6 @@ See the image below to see where your library lives
 
 # Descriptive Images
 Images are from the Udemy course [System C Project - Write a Garbage Collector from Scratch](https://www.udemy.com/course/memory-leak-detector/)
-![Normal MM](/assets/normal.png)
-![GC MM](/assets/gc.png)
+![Normal MM](./assets/normal.png)
+![GC MM](./assets/gc.png)
 
