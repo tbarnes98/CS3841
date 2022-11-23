@@ -1,8 +1,8 @@
 /*************************************
  *
- * Class: CS3840 - YOUR SECTION HERE
+ * Class: CS3840 - 021
  *
- * Name(s): YOUR NAME(S) HERE
+ * Name(s): Trevor Barnes
  *
  * Lab: Teeny Tiny Shell
  *
