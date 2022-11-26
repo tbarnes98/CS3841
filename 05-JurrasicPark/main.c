@@ -27,7 +27,7 @@
 #include "park.h"
 
 // Jurassic Park
-extern int begin;
+extern volatile int begin;
 extern JPARK myPark;
 extern pthread_mutex_t parkMutex;            // mutex park variable access
 extern pthread_mutex_t fillSeat[NUM_CARS];   // (signal) seat ready to fill
