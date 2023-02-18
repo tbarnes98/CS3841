@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define INPUT_MAX 256
 #define CMD_MAX 5
@@ -71,6 +72,8 @@ int main()
     char user_input[INPUT_MAX];
     char cmd_strs[CMD_MAX][INPUT_MAX];
 
+    int quit_flag = 0;
+
     // TODO need to be able to get input from
     //    the user in a loop
 
@@ -84,6 +87,11 @@ int main()
     }
 
     // TODO: Figure out how to handle the 'quit' command
+    if (strcmp(user_input, "quit") == 0){
+        printf("Quitting...");
+        exit(0);
+    }
+
 
     // Chop the input into command strings
     int cmd_count = parse_commands(user_input, cmd_strs);
@@ -101,6 +109,7 @@ int main()
         //        NOTE: the command name is always the first argument
         //    2) fork a process
         //    3) execute the command with execvp
+        
     }
 
     return 0;
