@@ -6,7 +6,11 @@
 	],
 	"settings": {
 		"files.associations": {
-			"stdio.h": "c"
+			"stdio.h": "c",
+			"mataddsingle": "c",
+			"stdint.h": "c",
+			"inttypes.h": "c",
+			"wait.h": "c"
 		}
 	}
 }
