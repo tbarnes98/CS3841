@@ -11,7 +11,6 @@
 #include <unistd.h>
 
 #define NS_PER_SEC 1000000000
-#define MAX 10
 
 static inline uint64_t gettime_ns() {
     struct timespec ts;

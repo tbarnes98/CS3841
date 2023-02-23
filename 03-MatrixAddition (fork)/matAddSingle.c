@@ -3,9 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 #define NS_PER_SEC 1000000000
-
 
 static inline uint64_t gettime_ns() {
     struct timespec ts;

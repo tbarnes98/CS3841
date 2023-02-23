@@ -10,7 +10,8 @@
 			"mataddsingle": "c",
 			"stdint.h": "c",
 			"inttypes.h": "c",
-			"wait.h": "c"
+			"wait.h": "c",
+			"stdlib.h": "c"
 		}
 	}
 }
