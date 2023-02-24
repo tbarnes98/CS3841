@@ -130,6 +130,8 @@ int main()
                     printf("Fork failed\n");
                     exit(1);
                 }
+                free(args);
+                free(str);
             }
         }
     }
