@@ -61,7 +61,7 @@ int parse_commands(char input[INPUT_MAX], char cmd_strs[CMD_MAX][INPUT_MAX])
     {
         if (cmd_count >= CMD_MAX)
         {
-            fprintf(stderr, "Too many commands\n");
+            fprintf(stderr, "\nToo many commands\n");
             return -1;
         }
         strncpy(cmd_strs[cmd_count], cmd_ptr, INPUT_MAX);
@@ -79,8 +79,7 @@ int main()
 
     int quit_flag = 0;
 
-    // TODO need to be able to get input from
-    //    the user in a loop
+    // Get user input in a loop
     while(quit_flag == 0) {
 
         // Print the input prompt
@@ -92,7 +91,7 @@ int main()
             return 1;
         }
 
-        // TODO: Figure out how to handle the 'quit' command
+        // Set quit flag
         if (strcmp(user_input, "quit") == 0){
             printf("Quitting...\n");
             quit_flag = 1;
@@ -107,30 +106,30 @@ int main()
         }
 
         // Chop the commands into arguments and execute one at a time
-        for (int i = 0; i < cmd_count; i++) {
-
-            char **args = malloc(ARG_MAX*sizeof(char *));
-            char* str = malloc(10*sizeof(char));
-            strncpy(str, strtok(cmd_strs[i], " "), 10);
-            int j = 0;
-            while(str != NULL) {
-                args[j] = malloc(10*sizeof(char));
-                strcpy(args[j], str);
-                str = strtok(NULL, " ");
-                j++;
-            }
-            pid_t pid = fork();
-
-            if(pid == 0) {
-                execvp(args[0], args);
-                printf("Command not found: %s\n", args[0]);
-                perror("Exec failed");
-                exit(1);
-            } else if(pid > 0) {
-                waitpid(pid, NULL, 0);
-            } else {
-                printf("Fork failed\n");
-                exit(1);
+        if(!quit_flag) {
+            for (int i = 0; i < cmd_count; i++) {
+                char **args = malloc(ARG_MAX*sizeof(char *));
+                char* str = malloc(10*sizeof(char));
+                strncpy(str, strtok(cmd_strs[i], " "), 10);
+                int j = 0;
+                while(str != NULL) {
+                    args[j] = malloc(10*sizeof(char));
+                    strcpy(args[j], str);
+                    str = strtok(NULL, " ");
+                    j++;
+                }
+                pid_t pid = fork();
+                if(pid == 0) {
+                    execvp(args[0], args);
+                    printf("Command not found: %s\n", args[0]);
+                    perror("Exec failed");
+                    exit(1);
+                } else if(pid > 0) {
+                    waitpid(pid, NULL, 0);
+                } else {
+                    printf("Fork failed\n");
+                    exit(1);
+                }
             }
         }
     }
