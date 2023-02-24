@@ -11,7 +11,9 @@
 			"stdint.h": "c",
 			"inttypes.h": "c",
 			"wait.h": "c",
-			"stdlib.h": "c"
+			"stdlib.h": "c",
+			"unistd.h": "c",
+			"types.h": "c"
 		}
 	}
 }

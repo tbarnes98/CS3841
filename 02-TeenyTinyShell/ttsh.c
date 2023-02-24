@@ -11,9 +11,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 #define INPUT_MAX 256
 #define CMD_MAX 5
+#define ARG_MAX 10
 
 /* read_cmd_string()
  *     Reads a line of text from the user
@@ -76,41 +81,58 @@ int main()
 
     // TODO need to be able to get input from
     //    the user in a loop
+    while(quit_flag == 0) {
 
-    // Print the input prompt
-    printf("$> ");
+        // Print the input prompt
+        printf("$> ");
 
-    // Read user input
-    if (read_cmd_string(user_input) == -1)
-    {
-        return 1;
+        // Read user input
+        if (read_cmd_string(user_input) == -1)
+        {
+            return 1;
+        }
+
+        // TODO: Figure out how to handle the 'quit' command
+        if (strcmp(user_input, "quit") == 0){
+            printf("Quitting...\n");
+            quit_flag = 1;
+        }
+
+
+        // Chop the input into command strings
+        int cmd_count = parse_commands(user_input, cmd_strs);
+        if (cmd_count == -1)
+        {
+            return 1;
+        }
+
+        // Chop the commands into arguments and execute one at a time
+        for (int i = 0; i < cmd_count; i++) {
+
+            char **args = malloc(ARG_MAX*sizeof(char *));
+            char* str = malloc(10*sizeof(char));
+            strncpy(str, strtok(cmd_strs[i], " "), 10);
+            int j = 0;
+            while(str != NULL) {
+                args[j] = malloc(10*sizeof(char));
+                strcpy(args[j], str);
+                str = strtok(NULL, " ");
+                j++;
+            }
+            pid_t pid = fork();
+
+            if(pid == 0) {
+                execvp(args[0], args);
+                printf("Command not found: %s\n", args[0]);
+                perror("Exec failed");
+                exit(1);
+            } else if(pid > 0) {
+                waitpid(pid, NULL, 0);
+            } else {
+                printf("Fork failed\n");
+                exit(1);
+            }
+        }
     }
-
-    // TODO: Figure out how to handle the 'quit' command
-    if (strcmp(user_input, "quit") == 0){
-        printf("Quitting...");
-        exit(0);
-    }
-
-
-    // Chop the input into command strings
-    int cmd_count = parse_commands(user_input, cmd_strs);
-    if (cmd_count == -1)
-    {
-        return 1;
-    }
-
-    // Chop the commands into arguments and execute one at a time
-    for (int i = 0; i < cmd_count; i++)
-    {
-        // TODO:
-        //    1) Chop the command into command line arguments
-        //        need to handle up to 10 arguments
-        //        NOTE: the command name is always the first argument
-        //    2) fork a process
-        //    3) execute the command with execvp
-        
-    }
-
     return 0;
 }
